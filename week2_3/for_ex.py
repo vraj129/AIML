@@ -37,6 +37,8 @@ for i in range(1,6):
     elif i == 5:
         print("Congratulations you finished the race")
 
+
+
 print("****************")
 for i in range(1,6):
     t = ""

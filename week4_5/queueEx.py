@@ -1,4 +1,6 @@
 from collections import deque
+import threading
+import time
 
 
 class Queue: 
@@ -29,10 +31,33 @@ def printBinary(values):
         string += str(t) + "\n"
     return string
 
-    
+
 
 def decimalToBinary(value):
     return bin(value).replace("0b","")
+
+def foodOrder(q,orders):
+    for order in orders:
+        time.sleep(0.5)
+        q.enqueue(order)
+
+def serveFood(q):
+    for i in range(q.size()):
+        time.sleep(2)
+        print(q.dequeue())
     
+
 if __name__ == "__main__":
+    q = Queue()
     print(printBinary(10))
+    orders = ['pizza','samosa','pasta','biryani','burger']
+    t1 = threading.Thread(target=foodOrder(q,orders))
+    t2 = threading.Thread(target=serveFood(q))
+    t1.start()
+    time.sleep(1)
+    t2.start()
+
+    
+    t1.join()
+    t2.join()
+

@@ -25,7 +25,7 @@ class TreeNode:
             if self.children:
                 for child in self.children:
                     child.printTree(type)
-        elif(type == "designation"):
+        elif type == "designation":
             spaces = " " * self.getLevel() * 3
             prefix = spaces + "|__" if self.parent else ""
             print(prefix + self.designation)
@@ -39,6 +39,34 @@ class TreeNode:
             if self.children:
                 for child in self.children:
                     child.printTree(type)
+
+
+class TreeNodeLocation:
+    def __init__(self, data):
+        self.parent = None
+        self.children = []
+        self.data = data
+
+    def addChild(self, child):
+        child.parent = self
+        self.children.append(child)
+
+    def getLevel(self):
+        level = 0
+        p = self.parent
+        while p:
+            level += 1
+            p = p.parent
+        return level
+
+    def print_tree(self, type):
+        if (self.getLevel() <= type):
+            spaces = ' ' * self.getLevel() * 3
+            prefix = spaces + "|__" if self.parent else ""
+            print(prefix + self.data)
+            if self.children:
+                for child in self.children:
+                    child.print_tree(type)
 
 
 def buildManagementTree():
@@ -68,34 +96,9 @@ def buildManagementTree():
     root.addChild(ctoNode)
     root.addChild(hrNode)
 
-    return root;
+    return root
 
-class TreeNodeLocation:
-    def __init__(self,data):
-        self.parent = None
-        self.children = []
-        self.data = data
-    
-    def addChild(self,child):
-        child.parent = self
-        self.children.append(child)
 
-    def getLevel(self):
-        level = 0
-        p = self.parent
-        while p:
-            level += 1
-            p = p.parent
-        return level
-
-    def print_tree(self,type):
-            if(self.getLevel() <= type):
-                spaces = ' ' * self.getLevel() * 3
-                prefix = spaces + "|__" if self.parent else ""
-                print(prefix + self.data)
-                if self.children:
-                    for child in self.children:
-                        child.print_tree(type)
 
 def buildLocationTree():
     root = TreeNodeLocation("Global")

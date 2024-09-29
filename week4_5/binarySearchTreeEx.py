@@ -29,10 +29,28 @@ class BinarySearchTreeNode:
 
         return elements
 
+    def findMin(self):
+        if self.left is None:
+            return  self.data
+        return  self.left.findMin()
+
+    def findMax(self):
+        if self.right is None:
+            return  self.data
+        return  self.right.findMax()
+
+    def calculateSum(self):
+        sumValue = 0
+        if self.left:
+            sumValue += self.left.calculateSum()
+        sumValue += self.data
+        if self.right:
+            sumValue += self.right.calculateSum()
+        return  sumValue
+
     def searchValue(self,val):
         if self.data == val:
             return True
-
         if val < self.data:
             if self.left:
                 return self.left.searchValue(val)
@@ -51,7 +69,10 @@ def buildTree(elements):
     return  root
 
 if __name__ == "__main__":
-    numbers = [17,4,1,20,9,23,18,34]
+    numbers = [17,4,3,20,9,23,18,34]
     numberTree = buildTree(numbers)
     print(numberTree.inOrderTraversal())
-    print(numberTree.searchValue(44))
+    print(numberTree.searchValue(1))
+    print(numberTree.findMin())
+    print(numberTree.findMax())
+    print(numberTree.calculateSum())

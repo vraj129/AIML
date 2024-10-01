@@ -49,8 +49,8 @@ class BinarySearchTreeNode:
 
     def findMin(self):
         if self.left is None:
-            return  self.data
-        return  self.left.findMin()
+            return self.data
+        return self.left.findMin()
 
     def findMax(self):
         if self.right is None:
@@ -79,6 +79,32 @@ class BinarySearchTreeNode:
                 return self.right.searchValue(val)
             else:
                 return False
+    
+    def deleteNode(self,val):
+        if val < self.data:
+            if self.left:
+                self.left = self.left.deleteNode(val)
+        elif val > self.data:
+            if self.right:
+                self.right = self.right.deleteNode(val)
+        else:
+            if self.left is None and self.right is None:
+                return None
+            if self.left is None:
+                return self.right
+            if self.right is None:
+                return self.left
+
+            minVal = self.findMin()
+            self.data = minVal
+            self.right = self.right.deleteNode(val)
+
+            # This is the solution for the exercise
+            # maxVal = self.findMax()
+            # self.data = maxVal
+            # self.left = self.left.deleteNode(val)
+        return self
+
 
 def buildTree(elements):
     root = BinarySearchTreeNode(elements[0])
@@ -87,7 +113,7 @@ def buildTree(elements):
     return  root
 
 if __name__ == "__main__":
-    numbers = [15,12,7,14,27,20,23,88]
+    numbers = [14, 10, 16, 4, 15, 12, 18, 17, 9, 2, 20, 11, 19]
     numberTree = buildTree(numbers)
     print(numberTree.inOrderTraversal())
     print(numberTree.searchValue(1))
@@ -96,3 +122,7 @@ if __name__ == "__main__":
     print(numberTree.calculateSum())
     print(numberTree.preOrderTraversal())
     print(numberTree.postOrderTraversal())
+    numberTree.deleteNode(20)
+    numberTree.deleteNode(12)
+    numberTree.deleteNode(2)
+    print(numberTree.inOrderTraversal())

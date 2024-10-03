@@ -44,7 +44,6 @@ if __name__ == "__main__":
     numbers = [1, 4, 6, 9, 11, 15, 15, 15, 17, 21, 34, 34, 56]
     numberToFind = 24
 
-    # print(linearSearch(numberToFind, numbers))
-    # print(binarySearch(19, numbers))
-    # print(binarySearchRecursive(122, numbers, 0, len(numbers) - 1))
-    print(binarySearchList(15, numbers))
+    print(linearSearch(numberToFind, numbers))
+    print(binarySearch(19, numbers))
+    print(binarySearchRecursive(122, numbers, 0, len(numbers) - 1))

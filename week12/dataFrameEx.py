@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("C:\\Users\\Vraj.Patel\\Desktop\\Vraj Patel\\AIML\\week12\\movies.csv")
+df = pd.read_csv("path to file")
 # print(df.head(3))
 # print(df.industry.unique())
 # print(df.language.value_counts())
